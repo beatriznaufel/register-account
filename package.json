@@ -1,0 +1,25 @@
+{
+  "name": "register-account",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^2.14.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.4",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "eslint": "^8.56.0",
+    "nuxt": "^3.10.0",
+    "typescript": "^5.3.3",
+    "@types/bun": "latest"
+  },
+  "module": "index.ts",
+  "type": "module"
+}
