@@ -4,6 +4,16 @@ interface RegisterForm {
     password: string;
 }
 
+interface RegisterResponse {
+    success: boolean;
+    user?: {
+        id: number;
+        email: string;
+        createdAt: string;
+    };
+    error?: string;
+}
+
 const form = ref<RegisterForm>({
     email: "",
     password: "",
@@ -11,30 +21,35 @@ const form = ref<RegisterForm>({
 
 const loading = ref(false);
 const error = ref("");
+const config = useRuntimeConfig();
 
 async function handleSubmit() {
     try {
         loading.value = true;
         error.value = "";
 
-        const response = await fetch("http://localhost:3000/register", {
+        const response = await fetch(`${config.public.apiBaseUrl}/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(form.value),
+            body: JSON.stringify({
+                email: form.value.email,
+                password: form.value.password,
+            }),
         });
 
-        const data = await response.json();
+        const data: RegisterResponse = await response.json();
 
         if (!data.success) {
-            error.value = data.error;
+            error.value = data.error || "Registration failed";
             return;
         }
 
         navigateTo("/home");
     } catch (e) {
-        error.value = "";
+        console.error("Erro completo:", e);
+        error.value = "An error occurred during registration";
     } finally {
         loading.value = false;
     }
