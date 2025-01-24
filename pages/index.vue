@@ -1,6 +1,3 @@
 <template>
-    <NuxtLayout>
-        <NuxtPage />
-        <Register />
-    </NuxtLayout>
+    <Register />
 </template>
