@@ -1,0 +1,4 @@
+<template>
+    <Register />
+    <Login />
+</template>

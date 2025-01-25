@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref } from "vue";
 const router = useRouter();
+const { setToken, setUser } = useAuth();
 
-interface RegisterForm {
+interface LoginForm {
     email: string;
     password: string;
 }
 
-interface RegisterResponse {
+interface LoginResponse {
     success: boolean;
     user?: {
         id: number;
         email: string;
-        createdAt: string;
     };
     error?: string;
-    token: string;
 }
 
-const form = ref<RegisterForm>({
+const form = ref<LoginForm>({
     email: "",
     password: "",
 });
@@ -33,7 +32,7 @@ async function handleSubmit() {
         loading.value = true;
         error.value = "";
 
-        const response = await fetch(`${config.public.apiBaseUrl}/register`, {
+        const response = await fetch(`${config.public.apiBaseUrl}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -44,26 +43,20 @@ async function handleSubmit() {
         const data = await response.json();
 
         if (!data.success) {
-            switch (response.status) {
-                case 409:
-                    error.value =
-                        "This email is already registered. Please use a different email or try logging in.";
-                    break;
-                case 400:
-                    error.value = data.error || "Invalid input data";
-                    break;
-                default:
-                    error.value = data.error || "Registration failed";
-            }
+            error.value = data.error || "Login failed";
             return;
         }
 
         if (data.user) {
-            await router.push("/");
+            setUser(data.user);
+            if (data.token) {
+                setToken(data.token);
+            }
+            await navigateTo("/welcome");
         }
     } catch (e) {
         console.error("Error:", e);
-        error.value = "An error occurred during registration";
+        error.value = "An error occurred during login";
     } finally {
         loading.value = false;
     }
@@ -76,7 +69,7 @@ async function handleSubmit() {
     >
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-8">
             <h1 class="text-xl font-semibold text-gray-500 mb-6 text-center">
-                Create your account
+                Login to your account
             </h1>
 
             <form @submit.prevent="handleSubmit" class="space-y-6">
@@ -122,10 +115,7 @@ async function handleSubmit() {
                     </div>
                 </div>
 
-                <div
-                    v-if="error"
-                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                >
+                <div v-if="error" class="text-red-500 text-sm">
                     {{ error }}
                 </div>
 
@@ -134,18 +124,18 @@ async function handleSubmit() {
                     class="w-full bg-pink-400 text-white py-2 px-4 rounded-md hover:bg-pink-450"
                     :disabled="loading"
                 >
-                    {{ loading ? "Registering..." : "Register" }}
+                    {{ loading ? "Logging in..." : "Login" }}
                 </button>
+
                 <div class="text-center text-sm text-gray-500">
-                    Already have an account?
+                    Don't have an account?
                     <NuxtLink
-                        to="/login"
+                        to="/register"
                         class="text-pink-400 hover:text-pink-500"
                     >
-                        Login here
+                        Register here
                     </NuxtLink>
                 </div>
-                Ï
             </form>
         </div>
     </div>
