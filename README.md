@@ -9,6 +9,8 @@ A modern web application for user registration and authentication, built with Nu
 - 📱 Responsive design
 - 🎨 Modern and intuitive interface
 - 🔄 Efficient state management
+- 🔍 Code quality tools with ESLint
+- 🪝 Git hooks with Husky
 
 ## 🛠️ Technologies
 
@@ -16,10 +18,13 @@ A modern web application for user registration and authentication, built with Nu
 - [Vue.js](https://vuejs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [ESLint](https://eslint.org/)
+- [Husky](https://typicode.github.io/husky/)
 
 ## 📋 Prerequisites
 
 - [Bun](https://bun.sh/) (latest version)
+- Node.js (for Husky hooks)
 
 ## 🚀 Installation and Setup
 
@@ -50,14 +55,6 @@ NUXT_PUBLIC_API_BASE_URL=http://localhost:3000
 ```bash
 bun run build
 ```
-
-## 👥 Contributing
-
-1. Fork the project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## ✨ Author
 

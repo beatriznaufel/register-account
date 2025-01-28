@@ -7,10 +7,12 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.14.1"
+    "@nuxt/ui": "^2.14.1",
+    "husky": "^9.1.7"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
