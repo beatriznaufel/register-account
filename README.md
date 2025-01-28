@@ -1,75 +1,64 @@
-# Nuxt Minimal Starter
+# 🚀 Register Account
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modern web application for user registration and authentication, built with Nuxt 3 and Vue.js.
 
-## Setup
+## 🌟 Features
 
-Make sure to install dependencies:
+- ✨ User registration
+- 🔐 Secure authentication
+- 📱 Responsive design
+- 🎨 Modern and intuitive interface
+- 🔄 Efficient state management
 
+## 🛠️ Technologies
+
+- [Nuxt 3](https://nuxt.com/)
+- [Vue.js](https://vuejs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+## 📋 Prerequisites
+
+- [Bun](https://bun.sh/) (latest version)
+
+## 🚀 Installation and Setup
+
+1. Clone the repository:
 ```bash
-# npm
-npm install
+git clone git@github.com:beatriznaufel/register-account.git
+```
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
+2. Install dependencies:
+```bash
 bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
+3. Run the development server:
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
 bun run dev
 ```
 
-## Production
+## 🔧 Configuration
 
-Build the application for production:
+Create a `.env` file in the root directory:
+```env
+NUXT_PUBLIC_API_BASE_URL=http://localhost:3000
+```
+
+## 📦 Production Build
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
 bun run build
 ```
 
-Locally preview production build:
+## 👥 Contributing
 
-```bash
-# npm
-npm run preview
+1. Fork the project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-# pnpm
-pnpm preview
+## ✨ Author
 
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Maria Beatriz - [GitHub](https://github.com/beatriznaufel)
