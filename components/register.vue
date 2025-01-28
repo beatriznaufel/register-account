@@ -1,75 +1,3 @@
-<script setup lang="ts">
-import { ref, computed } from "vue";
-const router = useRouter();
-
-interface RegisterForm {
-    email: string;
-    password: string;
-}
-
-interface RegisterResponse {
-    success: boolean;
-    user?: {
-        id: number;
-        email: string;
-        createdAt: string;
-    };
-    error?: string;
-    token: string;
-}
-
-const form = ref<RegisterForm>({
-    email: "",
-    password: "",
-});
-
-const loading = ref(false);
-const error = ref("");
-const showPassword = ref(false);
-const config = useRuntimeConfig();
-
-async function handleSubmit() {
-    try {
-        loading.value = true;
-        error.value = "";
-
-        const response = await fetch(`${config.public.apiBaseUrl}/register`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(form.value),
-        });
-
-        const data = await response.json();
-
-        if (!data.success) {
-            switch (response.status) {
-                case 409:
-                    error.value =
-                        "This email is already registered. Please use a different email or try logging in.";
-                    break;
-                case 400:
-                    error.value = data.error || "Invalid input data";
-                    break;
-                default:
-                    error.value = data.error || "Registration failed";
-            }
-            return;
-        }
-
-        if (data.user) {
-            await router.push("/");
-        }
-    } catch (e) {
-        console.error("Error:", e);
-        error.value = "An error occurred during registration";
-    } finally {
-        loading.value = false;
-    }
-}
-</script>
-
 <template>
     <div
         class="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 to-blue-100"
@@ -150,3 +78,75 @@ async function handleSubmit() {
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+import { ref, computed } from "vue";
+const router = useRouter();
+
+interface RegisterForm {
+    email: string;
+    password: string;
+}
+
+interface RegisterResponse {
+    success: boolean;
+    user?: {
+        id: number;
+        email: string;
+        createdAt: string;
+    };
+    error?: string;
+    token: string;
+}
+
+const form = ref<RegisterForm>({
+    email: "",
+    password: "",
+});
+
+const loading = ref(false);
+const error = ref("");
+const showPassword = ref(false);
+const config = useRuntimeConfig();
+
+async function handleSubmit() {
+    try {
+        loading.value = true;
+        error.value = "";
+
+        const response = await fetch(`${config.public.apiBaseUrl}/register`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form.value),
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+            switch (response.status) {
+                case 409:
+                    error.value =
+                        "This email is already registered. Please use a different email or try logging in.";
+                    break;
+                case 400:
+                    error.value = data.error || "Invalid input data";
+                    break;
+                default:
+                    error.value = data.error || "Registration failed";
+            }
+            return;
+        }
+
+        if (data.user) {
+            await router.push("/welcome");
+        }
+    } catch (e) {
+        console.error("Error:", e);
+        error.value = "An error occurred during registration";
+    } finally {
+        loading.value = false;
+    }
+}
+</script>

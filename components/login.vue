@@ -1,68 +1,3 @@
-<script setup lang="ts">
-import { ref } from "vue";
-const router = useRouter();
-const { setToken, setUser } = useAuth();
-
-interface LoginForm {
-    email: string;
-    password: string;
-}
-
-interface LoginResponse {
-    success: boolean;
-    user?: {
-        id: number;
-        email: string;
-    };
-    error?: string;
-}
-
-const form = ref<LoginForm>({
-    email: "",
-    password: "",
-});
-
-const loading = ref(false);
-const error = ref("");
-const showPassword = ref(false);
-const config = useRuntimeConfig();
-
-async function handleSubmit() {
-    try {
-        loading.value = true;
-        error.value = "";
-
-        const response = await fetch(`${config.public.apiBaseUrl}/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(form.value),
-        });
-
-        const data = await response.json();
-
-        if (!data.success) {
-            error.value = data.error || "Login failed";
-            return;
-        }
-
-        if (data.user) {
-            setUser(data.user);
-            if (data.token) {
-                setToken(data.token);
-            }
-            await navigateTo("/welcome");
-        }
-    } catch (e) {
-        console.error("Error:", e);
-        error.value = "An error occurred during login";
-    } finally {
-        loading.value = false;
-    }
-}
-</script>
-
 <template>
     <div
         class="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 to-blue-100"
@@ -140,3 +75,70 @@ async function handleSubmit() {
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+const router = useRouter();
+const { setToken, setUser } = useAuth();
+
+interface LoginForm {
+    email: string;
+    password: string;
+}
+
+interface LoginResponse {
+    success: boolean;
+    user?: {
+        id: number;
+        email: string;
+    };
+    error?: string;
+}
+
+const form = ref<LoginForm>({
+    email: "",
+    password: "",
+});
+
+const loading = ref(false);
+const error = ref("");
+const showPassword = ref(false);
+const config = useRuntimeConfig();
+
+async function handleSubmit() {
+    try {
+        loading.value = true;
+        error.value = "";
+
+        const response = await fetch(`${config.public.apiBaseUrl}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form.value),
+        });
+
+        const data = await response.json();
+        console.log("Login response:", data);
+
+        if (!data.success) {
+            error.value = data.error || "Login failed";
+            return;
+        }
+
+        if (data.user) {
+            console.log("Setting user and token");
+            const mockToken = btoa(data.user.email);
+            setUser(data.user);
+            setToken(mockToken);
+            console.log("Navigating to welcome");
+            await navigateTo("/welcome");
+        }
+    } catch (e) {
+        console.error("Error:", e);
+        error.value = "An error occurred during login";
+    } finally {
+        loading.value = false;
+    }
+}
+</script>
