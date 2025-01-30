@@ -18,7 +18,7 @@
                         type="email"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-black"
                         required
-                        placeholder="your@email.com"
+                        placeholder="email@address.com"
                     />
                 </div>
 
