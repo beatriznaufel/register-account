@@ -5,8 +5,6 @@ export default defineNuxtConfig({
   },
   ssr: true,
   pages: true,
-  devtools: { enabled: true },
-  compatibilityDate: "2025-01-17",
   runtimeConfig: {
     public: {
       apiBaseUrl:

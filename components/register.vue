@@ -82,6 +82,13 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 const router = useRouter();
+const { isAuthenticated } = useAuth();
+
+onMounted(() => {
+    if (isAuthenticated()) {
+        navigateTo("/welcome");
+    }
+});
 
 interface RegisterForm {
     email: string;

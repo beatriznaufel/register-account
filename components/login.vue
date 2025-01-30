@@ -80,6 +80,13 @@
 import { ref } from "vue";
 const router = useRouter();
 const { setToken, setUser } = useAuth();
+const { isAuthenticated } = useAuth();
+
+onMounted(() => {
+    if (isAuthenticated()) {
+        navigateTo("/welcome");
+    }
+});
 
 interface LoginForm {
     email: string;
@@ -119,7 +126,6 @@ async function handleSubmit() {
         });
 
         const data = await response.json();
-        console.log("Login response:", data);
 
         if (!data.success) {
             error.value = data.error || "Login failed";
@@ -127,11 +133,9 @@ async function handleSubmit() {
         }
 
         if (data.user) {
-            console.log("Setting user and token");
             const mockToken = btoa(data.user.email);
             setUser(data.user);
             setToken(mockToken);
-            console.log("Navigating to welcome");
             await navigateTo("/welcome");
         }
     } catch (e) {

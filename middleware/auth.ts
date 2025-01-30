@@ -3,14 +3,15 @@ export default defineNuxtRouteMiddleware((to) => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
 
-    const publicRoutes = ["/", "/login", "/register"];
+    const publicRoutes = ["/"];
     const protectedRoutes = ["/welcome"];
+    const authRoutes = ["/login", "/register"];
 
-    if ((!token || !user) && !publicRoutes.includes(to.path)) {
+    if ((!token || !user) && protectedRoutes.includes(to.path)) {
       return navigateTo("/login");
     }
 
-    if (token && user && publicRoutes.includes(to.path)) {
+    if (token && user && authRoutes.includes(to.path)) {
       return navigateTo("/welcome");
     }
   }
