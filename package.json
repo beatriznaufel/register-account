@@ -8,19 +8,21 @@
     "preview": "nuxt preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@nuxt/ui": "^2.14.1",
     "husky": "^9.1.7"
   },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.6.4",
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@antfu/eslint-config": "^4.1.0",
+    "@types/bun": "latest",
     "eslint": "^8.56.0",
-    "nuxt": "^3.10.0",
-    "typescript": "^5.3.3",
-    "@types/bun": "latest"
+    "globals": "^15.14.0",
+    "nuxt": "^3.10.0"
   },
   "module": "index.ts",
   "type": "module"

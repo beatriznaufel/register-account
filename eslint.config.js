@@ -1,11 +1,11 @@
-import antfu from "@antfu/eslint-config";
+import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  type: "lib",
+  type: 'lib',
 
   stylistic: {
     indent: 2,
-    quotes: "single",
+    quotes: 'single',
   },
 
   typescript: true,
@@ -13,5 +13,5 @@ export default antfu({
 
   jsonc: false,
   yaml: false,
-  ignores: ["**/fixtures"],
-});
+  ignores: ['**/fixtures'],
+})

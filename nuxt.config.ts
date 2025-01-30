@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ["@nuxt/ui", "@nuxtjs/tailwindcss"],
+  modules: ['@nuxt/ui', '@nuxtjs/tailwindcss'],
   devServer: {
     port: 3001,
   },
@@ -8,7 +8,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBaseUrl:
-        process.env.NUXT_PUBLIC_API_BASE_URL || "http://localhost:3000",
+        (import.meta.env.NUXT_PUBLIC_API_BASE_URL as string)
+        || 'http://localhost:3000',
     },
   },
-});
+})
